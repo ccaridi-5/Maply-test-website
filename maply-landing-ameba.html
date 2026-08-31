@@ -269,7 +269,6 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
       Maply
     </span>
     <div class="nav-links">
-      <a href="#problem">Why it's hard</a>
       <a href="#demo">Try it</a>
       <a href="#how">How it works</a>
     </div>
@@ -280,13 +279,12 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   <!-- ============ HERO ============ -->
   <section class="hero">
     <div class="hero-copy">
-      <h1>Move a prior firm's trial balance into Yardi without losing a dollar.</h1>
-      <p class="sub">Maply maps every account from the prior agent's books to your Yardi chart of accounts, sums the rollups, and refuses to export until the entry ties back to zero.</p>
+      <h1>Move a prior firm's financials into your Yardi Chart of Accounts</h1>
+      <p class="sub">Maply streamlines new property accounting onboarding</p>
       <div class="hero-cta">
         <a class="btn" href="maply-mockup.html">Start a mapping — free</a>
         <a class="btn-ghost" href="#demo">See it work ↓</a>
       </div>
-      <p class="hero-note">YOUR DATA IS SCOPED TO YOUR ACCOUNT · NOT SHARED ACROSS FIRMS</p>
     </div>
     <div class="skyline-wrap">
       <canvas id="skyline" aria-label="Animated illustration of a city skyline at dusk, each lit window representing one property under management."></canvas>
@@ -295,33 +293,34 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   </section>
 </div>
 
-<!-- ============ PROBLEM ============ -->
-<section class="band band-tint" id="problem">
+<!-- ============ HOW ============ -->
+<section class="band band-tint" id="how">
   <div class="wrap">
-    <p class="eyebrow">Why takeovers go wrong</p>
-    <h2 class="h2">Three ways a chart-of-accounts migration loses money</h2>
-    <p class="lede">Not workflow friction — actual errors that reach the financials and survive to the audit.</p>
+    <p class="eyebrow">How it works</p>
 
-    <div class="problems">
-      <div class="problem">
-        <div class="rule"></div>
-        <h3>Their chart isn't your chart</h3>
-        <p>The prior agent books rent across two accounts. You have one. Both rows have to land on the same Yardi account and their balances have to sum.</p>
-        <span class="fig">4010 + 4015 → 4010 · (41,250.00)</span>
+    <div class="steps">
+      <div class="step is-first">
+        <p class="n">01</p>
+        <h3>Upload</h3>
+        <p>Drop in the prior firm's trial balance CSV.</p>
       </div>
-      <div class="problem">
-        <div class="rule"></div>
-        <h3>Unassigned rows still carry balances</h3>
-        <p>Every row you skip is money with nowhere to go. It doesn't error — it silently never arrives, and the imbalance shows up weeks later.</p>
-        <span class="fig">5 rows unassigned · 42,300.00</span>
+      <div class="step">
+        <p class="n">02</p>
+        <h3>Assign</h3>
+        <p>Select source rows and choose the Yardi account they belong to — try it below. Many rows can roll into one account, and the balances automatically sum as you go.</p>
       </div>
-      <div class="problem">
-        <div class="rule"></div>
-        <h3>An entry that doesn't tie out corrupts the books</h3>
-        <p>A trial balance sums to zero. So must the journal entry you import. Maply checks it on every change and blocks the export until it holds.</p>
-        <span class="fig">source 0.00 = export 0.00</span>
+      <div class="step">
+        <p class="n">03</p>
+        <h3>Review</h3>
+        <p>Review your mappings from step 2.</p>
+      </div>
+      <div class="step">
+        <p class="n">04</p>
+        <h3>Export</h3>
+        <p>Set the takeover date, property, and book, then download a Yardi-ready journal entry.</p>
       </div>
     </div>
+    <p class="demo-note" style="margin-top:48px">Your firm's chart of accounts is uploaded once in Settings and reused on every session.</p>
   </div>
 </section>
 
@@ -362,78 +361,14 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
         </div>
       </div>
     </div>
-    <p class="demo-note">Manual assignment only — there's no AI auto-match to double-check here. You decide every mapping; Maply keeps the math honest and won't let an unbalanced entry through.</p>
-  </div>
-</section>
-
-<!-- ============ HOW ============ -->
-<section class="band band-tint" id="how">
-  <div class="wrap">
-    <p class="eyebrow">Four steps, in order</p>
-    <h2 class="h2">Upload once. Export when it ties.</h2>
-    <p class="lede">The order matters: nothing downstream is trustworthy until the step before it is settled.</p>
-
-    <div class="steps">
-      <div class="step is-first">
-        <p class="n">01</p>
-        <h3>Upload</h3>
-        <p>Drop in the prior firm's trial balance CSV. Maply reads GL code, label, and amount, and tells you immediately whether the file sums to zero.</p>
-      </div>
-      <div class="step">
-        <p class="n">02</p>
-        <h3>Assign</h3>
-        <p>Select source rows and choose the Yardi account they belong to — the step you just tried above. Many rows can roll into one account, and the balances sum as you go.</p>
-      </div>
-      <div class="step">
-        <p class="n">03</p>
-        <h3>Review</h3>
-        <p>Every destination account with its contributing rows underneath, and the tie-out: source total, mapped total, variance.</p>
-      </div>
-      <div class="step">
-        <p class="n">04</p>
-        <h3>Export</h3>
-        <p>Set the takeover date, property, and book, then download a Yardi-ready journal entry. Blocked until the variance is zero.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ WHAT THIS SOLVES ============ -->
-<section class="band" id="solves">
-  <div class="wrap">
-    <p class="eyebrow">Built for the takeover moment</p>
-    <h2 class="h2">Every time you take on a property, someone rebuilds its GL by hand.</h2>
-    <p class="lede">Maply is scoped to the transition event — not another portfolio dashboard to maintain.</p>
-
-    <div class="solves">
-      <div class="solve">
-        <div class="rule"></div>
-        <h3>New management contracts</h3>
-        <p>You win a building. The outgoing manager's chart of accounts doesn't match yours, and go-live doesn't wait for someone to reconcile it by hand.</p>
-        <span class="fig">180+ source GL codes, one takeover</span>
-      </div>
-      <div class="solve">
-        <div class="rule"></div>
-        <h3>Portfolio consolidation</h3>
-        <p>Ten buildings, ten prior managers, ten incompatible charts of accounts. Your firm's chart is uploaded once in Settings and reused on every session — you're not rebuilding the destination side each time.</p>
-        <span class="fig">one chart of accounts, every session</span>
-      </div>
-      <div class="solve">
-        <div class="rule"></div>
-        <h3>Audit-ready handoff</h3>
-        <p>A controller has to sign off before the entry posts. Maply keeps the source rows and the tie-out together in one place, instead of scattered across an Excel tab.</p>
-        <span class="fig">source total = mapped total, always</span>
-      </div>
-    </div>
+    <p class="demo-note">You decide every mapping; Maply keeps the math honest and won't let an unbalanced entry through.</p>
   </div>
 </section>
 
 <!-- ============ WHERE MAPLY IS DIFFERENT ============ -->
 <section class="band band-tint" id="different">
   <div class="wrap">
-    <p class="eyebrow">The alternative isn't another platform</p>
-    <h2 class="h2">The status quo is a spreadsheet and someone who remembers how it's done.</h2>
-    <p class="lede">Most mapping tools are built to standardize a portfolio you already run. Maply is built for the day you take one over.</p>
+    <h2 class="h2">Built for Takeover</h2>
 
     <div class="compare">
       <div class="compare-col is-today">
@@ -445,10 +380,10 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
       </div>
       <div class="compare-col is-maply">
         <p class="col-title">With Maply</p>
-        <div class="compare-item"><span class="mark"></span><span>Every mapping is manual and reviewable — no black-box matching to second-guess</span></div>
+        <div class="compare-item"><span class="mark"></span><span>Every mapping is manual and reviewable</span></div>
         <div class="compare-item"><span class="mark"></span><span>Export is physically blocked until source total equals mapped total</span></div>
         <div class="compare-item"><span class="mark"></span><span>Your chart of accounts is uploaded once and reused on every session</span></div>
-        <div class="compare-item"><span class="mark"></span><span>You leave with a controller-approved, Yardi-ready file — not a spreadsheet tab</span></div>
+        <div class="compare-item"><span class="mark"></span><span>You leave with a CSV file that is ready to be uploaded to Yardi</span></div>
       </div>
     </div>
   </div>
