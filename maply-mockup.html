@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <title>Maply</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -331,6 +332,7 @@ input[type=checkbox]{accent-color:var(--signal-blue);width:15px;height:15px;flex
       </button>
     </div>
     <div class="rail-foot">
+      <span class="pill pill-warn" id="guestBadge" style="align-self:flex-start;margin-bottom:8px" hidden>Guest — not saved to an account</span>
       <button class="rail-link" onclick="signOut()">
         <svg viewBox="0 0 16 16"><path d="M6 13.5H3.5v-11H6M10 11l3-3-3-3M13 8H6.5"/></svg>
         Sign out
@@ -375,8 +377,12 @@ input[type=checkbox]{accent-color:var(--signal-blue);width:15px;height:15px;flex
           <div style="display:flex;gap:10px;align-items:center">
             <button class="btn" type="submit" id="authSubmitBtn">Sign in</button>
             <button class="btn-quiet" type="button" onclick="toggleAuthMode()" id="authToggleBtn">Create an account</button>
+            <span style="flex:1"></span>
+            <button type="button" style="font-size:14px;color:var(--signal-blue);text-decoration:underline;text-underline-offset:2px" onclick="continueAsGuest()">Continue without an account</button>
           </div>
         </form>
+
+        <p class="required"><b>Note:</b> This is a demo. Please don't upload real or sensitive financial data — this applies to guest sessions and new accounts alike.</p>
       </div>
     </section>
 
@@ -604,6 +610,7 @@ const MATCH = {exact:['pill-ok','Exact'], fuzzy:['pill-warn','Suggested'], manua
 /* ---------------- navigation ---------------- */
 function go(view){
   if(view !== 'auth' && !state.user){ view = 'auth'; }
+  document.getElementById('guestBadge').hidden = !state.user?.is_anonymous;
   state.view = view;
   document.querySelectorAll('.view').forEach(v => v.classList.toggle('is-active', v.id === 'view-' + view));
   const inSession = !['sessions','auth','settings'].includes(view);
@@ -868,8 +875,8 @@ async function openSession(id){
   go(hasRows ? 'assign' : 'upload');
 }
 
-async function createSession(){
-  const name = (window.prompt('Name this session (e.g. the property or portfolio)', '') || '').trim() || 'Untitled session';
+async function createSession(presetName){
+  const name = presetName || (window.prompt('Name this session (e.g. the property or portfolio)', '') || '').trim() || 'Untitled session';
   const {data, error} = await sb.from('sessions').insert({name}).select().single();
   if(error){ console.error('createSession failed', error); alert('Could not create session: ' + error.message); return; }
   currentSessionId = data.id;
@@ -1034,11 +1041,22 @@ function signOut(){
   sb.auth.signOut();
 }
 
+let guestAutoStart = false;
+function continueAsGuest(){
+  guestAutoStart = true;
+  sb.auth.signInAnonymously().then(({error}) => {
+    if(error){ console.error('Guest sign-in failed', error); guestAutoStart = false; }
+  });
+}
+
 sb.auth.onAuthStateChange((event, session) => {
   state.user = session?.user || null;
   if(state.user){
     loadChartOfAccounts();
-    if(state.view === 'auth') go('sessions'); else render();
+    if(guestAutoStart){
+      guestAutoStart = false;
+      createSession('Guest session');
+    } else if(state.view === 'auth') go('sessions'); else render();
   } else {
     currentSessionId = null; sessions = []; rows = []; accounts = [];
     go('auth');
@@ -1049,7 +1067,11 @@ sb.auth.onAuthStateChange((event, session) => {
 renderAuth();
 sb.auth.getSession().then(({data}) => {
   state.user = data.session?.user || null;
-  if(state.user) loadChartOfAccounts();
-  go(state.user ? 'sessions' : 'auth');
+  if(state.user){
+    loadChartOfAccounts();
+    go('sessions');
+  } else {
+    go('auth');
+  }
 });
 </script>
