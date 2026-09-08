@@ -1,0 +1,6 @@
+{
+  "cleanUrls": true,
+  "redirects": [
+    { "source": "/maply-mockup.html", "destination": "/app", "permanent": true }
+  ]
+}
